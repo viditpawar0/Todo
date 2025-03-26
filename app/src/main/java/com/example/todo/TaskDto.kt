@@ -8,5 +8,5 @@ class TaskDto(
 ): FirestoreEntityDto<Task> {
     override fun getDocumentID(): String? = id
     override fun isNew(): Boolean = id == null
-    override fun toT(): Task = Task(title, priority, completed)
+    override fun toE(): Task = Task(title, priority, completed)
 }

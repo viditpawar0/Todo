@@ -1,5 +1,5 @@
 package com.example.todo
 
 interface FirestoreEntity<D> {
-    fun toDto(id: String): D
+    fun toD(id: String): D
 }
