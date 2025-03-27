@@ -26,6 +26,7 @@ import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
+import androidx.compose.material3.ListItem
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
@@ -94,30 +95,32 @@ class MainActivity : ComponentActivity() {
                                     openTaskEditorDialog(viewModel, task)
                                 }
                         ) {
-                            Row(
-                                Modifier.padding(8.dp),
-                                verticalAlignment = Alignment.CenterVertically
-                            ) {
-                                Checkbox(
-                                    modifier = Modifier.weight(1f),
-                                    checked = task.completed,
-                                    onCheckedChange = {
-                                        task.completed = it
-                                        viewModel.updateTask(task)
-                                    }
-                                )
-                                Text(
-                                    task.title,
-                                    textDecoration = if (task.completed) TextDecoration.LineThrough else TextDecoration.None,
-                                    modifier = Modifier.weight(2f),
-                                    style = MaterialTheme.typography.titleLarge
-                                )
-                                Text(
-                                    task.priority.toString(),
-                                    modifier = Modifier.weight(1f),
-                                    textAlign = TextAlign.Center
-                                )
-                            }
+                            ListItem(
+                                headlineContent = {
+                                    Text(
+                                        task.title,
+                                        textDecoration = if (task.completed) TextDecoration.LineThrough else TextDecoration.None,
+                                        modifier = Modifier.weight(2f),
+                                    )
+                                },
+                                leadingContent = {
+                                    Checkbox(
+                                        modifier = Modifier.weight(1f),
+                                        checked = task.completed,
+                                        onCheckedChange = {
+                                            task.completed = it
+                                            viewModel.updateTask(task)
+                                        }
+                                    )
+                                },
+                                trailingContent = {
+                                    Text(
+                                        task.priority.toString(),
+                                        modifier = Modifier.weight(1f),
+                                        textAlign = TextAlign.Center
+                                    )
+                                }
+                            )
                         }
                     }
                 }
